@@ -10,6 +10,14 @@
         --icon-bg: #000000;
         --icon-stroke: #1ed8ff;
         --icon-glow: rgba(30, 216, 255, 0.9);
+        --panel-bg: rgba(255, 255, 255, 0.88);
+        --panel-border: rgba(15, 26, 44, 0.08);
+        --panel-shadow: rgba(22, 32, 44, 0.12);
+        --text: #0d1726;
+        --field-border: rgba(16, 24, 40, 0.18);
+        --field-focus: rgba(30, 216, 255, 0.65);
+        --button-bg: #0d1b2a;
+        --button-text: #ffffff;
       }
 
       * {
@@ -75,6 +83,102 @@
       .logo .soft {
         stroke: rgba(30, 216, 255, 0.7);
       }
+
+      .login-panel {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: min(92vw, 420px);
+        background: var(--panel-bg);
+        border: 1px solid var(--panel-border);
+        border-radius: 16px;
+        box-shadow: 0 14px 34px var(--panel-shadow);
+        padding: 28px 24px 22px;
+      }
+
+      .login-title {
+        margin: 0 0 18px;
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--text);
+        letter-spacing: -0.04em;
+      }
+
+      .field {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 18px;
+      }
+
+      .field label {
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        color: var(--text);
+      }
+
+      .field input {
+        width: 100%;
+        height: 48px;
+        border: 1px solid var(--field-border);
+        border-radius: 10px;
+        background: #fff;
+        color: var(--text);
+        padding: 0 14px;
+        font-size: 1rem;
+        outline: none;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .field input:focus {
+        border-color: var(--field-focus);
+        box-shadow: 0 0 0 3px rgba(30, 216, 255, 0.18);
+      }
+
+      .actions {
+        margin-top: 10px;
+      }
+
+      .submit-btn {
+        width: 100%;
+        height: 48px;
+        border: none;
+        border-radius: 10px;
+        background: var(--button-bg);
+        color: var(--button-text);
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: transform 0.15s ease, opacity 0.15s ease;
+      }
+
+      .submit-btn:hover {
+        opacity: 0.96;
+      }
+
+      .submit-btn:active {
+        transform: translateY(1px);
+      }
+
+      @media (max-width: 640px) {
+        .logo-wrap {
+          left: 20px;
+          top: 12px;
+          width: 150px;
+          height: 92px;
+        }
+
+        .login-panel {
+          padding: 22px 18px 18px;
+          border-radius: 12px;
+        }
+
+        .login-title {
+          font-size: 1.6rem;
+        }
+      }
     </style>
   </head>
   <body>
@@ -93,6 +197,24 @@
           </svg>
         </div>
       </div>
+
+      <form class="login-panel" aria-label="Sign in form">
+        <h1 class="login-title">Sign in</h1>
+
+        <div class="field">
+          <label for="username">Username</label>
+          <input id="username" name="username" type="text" placeholder="Enter username" />
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" placeholder="Enter password" />
+        </div>
+
+        <div class="actions">
+          <button class="submit-btn" type="submit">Continue</button>
+        </div>
+      </form>
     </div>
   </body>
 </html>
