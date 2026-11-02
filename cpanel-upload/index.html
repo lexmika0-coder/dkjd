@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Neon Access Portal</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="auth-body">
+    <div class="page-shell">
+      <div class="brand-mark" aria-label="Brand logo">
+        <div class="brand-icon">
+          <svg viewBox="0 0 180 110" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Neon dual-arrow logo">
+            <path class="soft" d="M 14 18 L 68 55 L 14 92" />
+            <path d="M 14 18 L 68 55 L 14 92" />
+            <path class="soft" d="M 100 18 L 154 55 L 100 92" />
+            <path d="M 100 18 L 154 55 L 100 92" />
+            <line class="soft" x1="72" y1="22" x2="72" y2="88" />
+            <line x1="72" y1="22" x2="72" y2="88" />
+          </svg>
+        </div>
+      </div>
+
+      <main class="login-panel" aria-label="sign in form">
+        <h1 class="panel-title">Sign in</h1>
+
+        <form id="loginForm" novalidate>
+          <div class="field-group">
+            <label for="username">Username</label>
+            <input id="username" name="username" type="text" placeholder="Enter username" autocomplete="username" />
+          </div>
+
+          <div class="field-group">
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" placeholder="Enter password" autocomplete="current-password" />
+          </div>
+
+          <div class="submit-wrap">
+            <button class="primary-btn" type="submit">Continue</button>
+          </div>
+
+          <div class="status-message" id="statusMessage" aria-live="polite"></div>
+        </form>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
