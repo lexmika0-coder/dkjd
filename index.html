@@ -3,65 +3,73 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Static Page</title>
+    <title>Neon Access Portal</title>
     <style>
       :root {
-        --page-bg: #f0f0f0;
-        --icon-bg: #000000;
-        --icon-stroke: #1ed8ff;
-        --icon-glow: rgba(30, 216, 255, 0.9);
-        --panel-bg: rgba(255, 255, 255, 0.88);
-        --panel-border: rgba(15, 26, 44, 0.08);
+        --page-bg: #f1f3f5;
+        --brand-bg: #070d13;
+        --brand-stroke: #1ed8ff;
+        --brand-soft: rgba(30, 216, 255, 0.62);
+        --panel-bg: rgba(255, 255, 255, 0.9);
+        --panel-border: rgba(16, 24, 40, 0.08);
         --panel-shadow: rgba(22, 32, 44, 0.12);
         --text: #0d1726;
+        --muted: #53657a;
         --field-border: rgba(16, 24, 40, 0.18);
-        --field-focus: rgba(30, 216, 255, 0.65);
+        --field-focus: rgba(30, 216, 255, 0.7);
         --button-bg: #0d1b2a;
+        --button-hover: #13273d;
         --button-text: #ffffff;
+        --success-bg: rgba(19, 188, 120, 0.12);
+        --success-border: rgba(19, 188, 120, 0.35);
+        --success-text: #0f6a44;
       }
 
-      * {
-        box-sizing: border-box;
-      }
+      * { box-sizing: border-box; }
 
       html, body {
         margin: 0;
         width: 100%;
-        height: 100%;
+        min-height: 100%;
         background: var(--page-bg);
+        color: var(--text);
         font-family: Arial, Helvetica, sans-serif;
       }
 
       body {
         min-height: 100vh;
-        overflow: hidden;
+        display: grid;
+        place-items: center;
       }
 
       .page {
         position: relative;
         width: 100%;
         min-height: 100vh;
-        background: var(--page-bg);
+        background:
+          radial-gradient(circle at top left, rgba(30, 216, 255, 0.08), transparent 26%),
+          var(--page-bg);
+        overflow: hidden;
       }
 
       .logo-wrap {
         position: absolute;
-        left: 20px;
-        top: 16px;
-        width: 180px;
-        height: 108px;
+        left: 24px;
+        top: 18px;
+        width: 178px;
+        height: 110px;
         display: flex;
         align-items: center;
         justify-content: center;
-        background: var(--icon-bg);
+        background: var(--brand-bg);
         border-radius: 2px;
-        box-shadow: 0 0 0 1px rgba(30, 216, 255, 0.35);
+        box-shadow: 0 0 0 1px rgba(30, 216, 255, 0.38);
       }
 
       .logo {
         position: relative;
-        width: 140px;
-        height: 82px;
+        width: 144px;
+        height: 84px;
       }
 
       .logo svg {
@@ -73,15 +81,15 @@
       .logo path,
       .logo line {
         fill: none;
-        stroke: var(--icon-stroke);
-        stroke-width: 4.8;
+        stroke: var(--brand-stroke);
+        stroke-width: 4.7;
         stroke-linecap: round;
         stroke-linejoin: round;
-        filter: drop-shadow(0 0 5px var(--icon-glow));
+        filter: drop-shadow(0 0 5px rgba(30, 216, 255, 0.9));
       }
 
       .logo .soft {
-        stroke: rgba(30, 216, 255, 0.7);
+        stroke: var(--brand-soft);
       }
 
       .login-panel {
@@ -95,14 +103,14 @@
         border-radius: 16px;
         box-shadow: 0 14px 34px var(--panel-shadow);
         padding: 28px 24px 22px;
+        backdrop-filter: blur(6px);
       }
 
       .login-title {
         margin: 0 0 18px;
-        font-size: 2rem;
+        font-size: clamp(1.7rem, 3vw, 2.1rem);
         font-weight: 700;
-        color: var(--text);
-        letter-spacing: -0.04em;
+        letter-spacing: -0.05em;
       }
 
       .field {
@@ -124,12 +132,16 @@
         height: 48px;
         border: 1px solid var(--field-border);
         border-radius: 10px;
-        background: #fff;
+        background: rgba(255, 255, 255, 0.85);
         color: var(--text);
         padding: 0 14px;
         font-size: 1rem;
         outline: none;
-        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+      }
+
+      .field input::placeholder {
+        color: rgba(13, 23, 38, 0.45);
       }
 
       .field input:focus {
@@ -144,39 +156,51 @@
       .submit-btn {
         width: 100%;
         height: 48px;
-        border: none;
+        border: 0;
         border-radius: 10px;
         background: var(--button-bg);
         color: var(--button-text);
         font-size: 1rem;
         font-weight: 700;
         cursor: pointer;
-        transition: transform 0.15s ease, opacity 0.15s ease;
+        transition: background 0.18s ease, transform 0.15s ease, opacity 0.18s ease;
       }
 
       .submit-btn:hover {
-        opacity: 0.96;
+        background: var(--button-hover);
       }
 
       .submit-btn:active {
         transform: translateY(1px);
       }
 
+      .status {
+        display: none;
+        margin-top: 14px;
+        padding: 10px 12px;
+        border-radius: 10px;
+        border: 1px solid var(--success-border);
+        background: var(--success-bg);
+        color: var(--success-text);
+        font-size: 0.92rem;
+        font-weight: 600;
+      }
+
+      .status.visible {
+        display: block;
+      }
+
       @media (max-width: 640px) {
         .logo-wrap {
-          left: 20px;
+          left: 18px;
           top: 12px;
-          width: 150px;
-          height: 92px;
+          width: 146px;
+          height: 90px;
         }
 
         .login-panel {
           padding: 22px 18px 18px;
           border-radius: 12px;
-        }
-
-        .login-title {
-          font-size: 1.6rem;
         }
       }
     </style>
@@ -198,23 +222,47 @@
         </div>
       </div>
 
-      <form class="login-panel" aria-label="Sign in form">
+      <form class="login-panel" id="loginForm" aria-label="Sign in form">
         <h1 class="login-title">Sign in</h1>
 
         <div class="field">
           <label for="username">Username</label>
-          <input id="username" name="username" type="text" placeholder="Enter username" />
+          <input id="username" name="username" type="text" placeholder="Enter username" autocomplete="username" />
         </div>
 
         <div class="field">
           <label for="password">Password</label>
-          <input id="password" name="password" type="password" placeholder="Enter password" />
+          <input id="password" name="password" type="password" placeholder="Enter password" autocomplete="current-password" />
         </div>
 
         <div class="actions">
           <button class="submit-btn" type="submit">Continue</button>
         </div>
+
+        <div class="status" id="statusMessage" aria-live="polite">
+          You have successfully signed in.
+        </div>
       </form>
     </div>
+
+    <script>
+      const form = document.getElementById('loginForm');
+      const status = document.getElementById('statusMessage');
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value.trim();
+
+        if (!username || !password) {
+          status.textContent = 'Please enter both username and password.';
+          status.classList.add('visible');
+          return;
+        }
+
+        status.textContent = 'Welcome back, ' + username + '. Your session is ready.';
+        status.classList.add('visible');
+      });
+    </script>
   </body>
 </html>
